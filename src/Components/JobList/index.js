@@ -15,6 +15,21 @@ const JobList = () => {
     setFilters(newFilters);
   };
 
+  const filterJobs = (job) => {
+    if (filters.length) {
+      const filtersInJob = [
+        ...filters.filter(
+          (f) => job.languages.includes(f) || job.tools.includes(f)
+        ),
+        ...(filters.includes(job.role) ? [job.role] : []),
+        ...(filters.includes(job.level) ? [job.level] : []),
+      ];
+
+      return filtersInJob.length === filters.length;
+    }
+    return true;
+  };
+
   return (
     <>
       <FilterInput
@@ -23,25 +38,12 @@ const JobList = () => {
         clearFilters={() => setFilters([])}
       />
       <SList>
-        {jobsData
-          .filter((job) => {
-            if (filters.length) {
-              return (
-                filters.filter(
-                  (f) => job.languages.includes(f) || job.tools.includes(f)
-                ).length > 0 ||
-                filters.includes(job.role) ||
-                filters.includes(job.level)
-              );
-            }
-            return true;
-          })
-          .map((job) => (
-            <JobItem
-              {...job}
-              onFilterClick={(value) => handleFilterClick(value)}
-            />
-          ))}
+        {jobsData.filter(filterJobs).map((job) => (
+          <JobItem
+            {...job}
+            onFilterClick={(value) => handleFilterClick(value)}
+          />
+        ))}
       </SList>
     </>
   );
