@@ -24,6 +24,7 @@ const Job = ({
   location,
   languages,
   tools,
+  onFilterClick,
 }) => (
   <SWrapper>
     <SLogo src={logo} />
@@ -41,13 +42,13 @@ const Job = ({
       </SInfo>
     </SDetails>
     <SFeatureChipsWrapper>
-      <SChip>{role}</SChip>
-      <SChip>{level}</SChip>
+      <SChip onClick={() => onFilterClick(role)}>{role}</SChip>
+      <SChip onClick={() => onFilterClick(level)}>{level}</SChip>
       {languages.map((lang) => (
-        <SChip>{lang}</SChip>
+        <SChip onClick={() => onFilterClick(lang)}>{lang}</SChip>
       ))}
       {tools.map((tool) => (
-        <SChip>{tool}</SChip>
+        <SChip onClick={() => onFilterClick(tool)}>{tool}</SChip>
       ))}
     </SFeatureChipsWrapper>
   </SWrapper>

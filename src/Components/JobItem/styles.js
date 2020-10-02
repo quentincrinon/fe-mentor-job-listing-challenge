@@ -8,7 +8,6 @@ const grey = `hsl(180, 8%, 52%)`;
 const darkGrey = `hsl(180, 14%, 20%)`;
 
 const SWrapper = styled.ul`
-  width: 100%;
   padding: ${spacing}px;
   display: flex;
   align-items: center;
